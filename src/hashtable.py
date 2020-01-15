@@ -66,10 +66,6 @@ class HashTable:
             self.storage[index] = new_node
 
 
-
-
-
-
     def remove(self, key):
         '''
         Remove the value stored with the given key.
@@ -103,7 +99,16 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        self.capacity *= 2 # doubling the capacity
+        prev = self.storage
+        self.storage = [None] * self.capacity # creating new array with an increased capacity
+
+        for each_node in prev:
+            current_node = each_node #interate each node
+            while current_node is not None: #  ... while we still have elements in nodes
+                self.insert(current_node.key, current_node.value)
+                current_node = current_node.next
+        
 
 
 
