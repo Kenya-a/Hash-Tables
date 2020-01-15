@@ -78,12 +78,13 @@ class HashTable:
         current_node  = self.storage[index]
         last_node = None
 
+         #if requested node not found and key doesn't match, iterate through nodes changing the pointers.
         while(current_node is not None) and (current_node.key != key):
             last_node = current_node
             current_node = last_node.next
         if current_node is None:
             print('key not removed')
-        if last_node is None:
+        if last_node is None: # if linked pair is at the start of the list
             self.storage[index] = current_node.next
         else:
             last_node.next = current_node.next
