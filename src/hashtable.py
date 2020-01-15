@@ -51,7 +51,22 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+        current_node = self.storage[index]
+        last_node = None
+
+        while (current_node is not None) and (current_node.key != key): # Collision
+            last_node = current_node
+            current_node = last_node.next
+        if current_node is not None:
+            current_node.value = value
+        else: # create and add new node
+            new_node = LinkedPair(key, value) 
+            new_node.next = self.storage[index]
+            self.storage[index] = new_node
+
+
+
 
 
 
@@ -74,8 +89,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
-
+        index = self._hash_mod(key) # compute the index of the key
+        current_node = self.storage[index] # go to first node
+        while current_node is not None: # traverse linked list at this node
+            if current_node.key == key: 
+                return current_node.value # return value if key is the target
+            current_node = current_node.next # if not go on and try the next node
 
     def resize(self):
         '''
